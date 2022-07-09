@@ -25,7 +25,10 @@ app.listen(PORT, () => {
 });
 
 app.get('/', async (req, res) => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
     const page = await browser.newPage();
     await page.goto('https://tfl.gov.uk/tube-dlr-overground/status/#linesResponse-status');
 
