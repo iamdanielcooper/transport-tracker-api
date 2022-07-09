@@ -1,6 +1,6 @@
 const app = require('./index');
 const puppeteer = require('puppeteer');
-const PORT = process.env.PORT | 3000;
+const PORT = process.env.PORT || 3000;
 
 const colors = {
     Bakerloo: 0x3b0c00,
@@ -21,7 +21,7 @@ const colors = {
 };
 
 app.listen(PORT, () => {
-    console.log('listening');
+    console.log(`listening on port ${PORT}`);
 });
 
 app.get('/', async (req, res) => {
