@@ -7,7 +7,7 @@ const colors = {
     Central: 0xff0000,
     Circle: 0xffee00,
     District: 0x013d01,
-    Metropolitan: 0x000000,
+    Metropolitan: 0xa3021f,
     'Elizabeth line': 0x9364cd,
     'Hammersmith & City': 0xfc42ff,
     Jubilee: 0xa0a5a9,
