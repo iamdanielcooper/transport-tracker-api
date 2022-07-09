@@ -2,6 +2,24 @@ const app = require('./index');
 const puppeteer = require('puppeteer');
 const PORT = process.env.PORT | 3000;
 
+const colors = {
+    Bakerloo: 0x3b0c00,
+    Central: 0xff0000,
+    Circle: 0xffee00,
+    District: 0x013d01,
+    Metropolitan: 0x000000,
+    'Elizabeth line': 0x9364cd,
+    'Hammersmith & City': 0xfc42ff,
+    Jubilee: 0xa0a5a9,
+    Northern: 0x000000,
+    Piccadilly: 0x003688,
+    Victoria: 0x0098d4,
+    'Waterloo & City': 0x95cdba,
+    DLR: 0x00a4a7,
+    'London Overground': 0xee7c0e,
+    Tram: 0x84b817,
+};
+
 app.listen(PORT, () => {
     console.log('listening');
 });
@@ -23,8 +41,15 @@ app.get('/', async (req, res) => {
         statuses.map(async status => await status.evaluate(i => i.textContent.trim()))
     );
 
-    const result = {};
+    const result = [];
     for (let i = 0; i < lineNames.length; i++) {
+        let temp = {
+            name: lineNames[i],
+            status: lineStatuses[i],
+            formatted_display_text: `${lineNames[i]}: ${lineStatuses[i]}`,
+            color: colors[lineNames[i]],
+        };
+        result.push(temp);
         result[lineNames[i]] = lineStatuses[i];
     }
 
