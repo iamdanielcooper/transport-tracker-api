@@ -63,7 +63,10 @@ app.get('/', async (req, res) => {
 
 app.get('/instagram', async (req, res) => {
     // var item = images[Math.floor(Math.random() * images.length)];
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    });
     const page = await browser.newPage();
     await page.goto('https://dumpor.com/v/raku_uugp');
 
