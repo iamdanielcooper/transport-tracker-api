@@ -68,7 +68,7 @@ app.get('/instagram', async (req, res) => {
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
     const page = await browser.newPage();
-    await page.goto('https://dumpor.com/v/raku_uugp');
+    await page.goto('https://dumpor.com/v/minori_nakada');
 
     await page.waitForSelector('img.content__img');
     const images = await page.$$('img.content__img');
@@ -80,5 +80,5 @@ app.get('/instagram', async (req, res) => {
     // await page.screenshot({ path: 'example.png' });
 
     await browser.close();
-    res.send(urls[0]);
+    res.send(urls[1]);
 });
