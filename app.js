@@ -74,7 +74,7 @@ app.get('/instagram', async (req, res) => {
 
     console.log(urls);
 
-    await page.screenshot({ path: 'example.png' });
+    // await page.screenshot({ path: 'example.png' });
 
     await browser.close();
     res.send(urls[0]);
