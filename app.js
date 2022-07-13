@@ -1,6 +1,7 @@
 const app = require('./index');
 const puppeteer = require('puppeteer');
 const PORT = process.env.PORT || 3000;
+const images = require('./images.json');
 
 const colors = {
     Bakerloo: 0x3b0c00,
@@ -58,4 +59,23 @@ app.get('/', async (req, res) => {
 
     await browser.close();
     res.send(result);
+});
+
+app.get('/instagram', async (req, res) => {
+    // var item = images[Math.floor(Math.random() * images.length)];
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto('https://dumpor.com/v/raku_uugp');
+
+    await page.waitForSelector('img.content__img');
+    const images = await page.$$('img.content__img');
+
+    const urls = await Promise.all(images.map(async image => await image.evaluate(i => i.getAttribute('src'))));
+
+    console.log(urls);
+
+    await page.screenshot({ path: 'example.png' });
+
+    await browser.close();
+    res.send(urls[0]);
 });
