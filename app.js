@@ -62,13 +62,24 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/instagram', async (req, res) => {
-    // var item = images[Math.floor(Math.random() * images.length)];
     const browser = await puppeteer.launch({
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
     });
     const page = await browser.newPage();
-    await page.goto('https://dumpor.com/v/minori_nakada');
+
+    const followedAccounts = [
+        'https://dumpor.com/v/georgiasmiles',
+        'https://dumpor.com/v/dan_cooper28',
+        'https://dumpor.com/v/fingers_harris',
+        'https://dumpor.com/v/sadshrimps',
+        'https://dumpor.com/v/hattiestewart',
+        'https://dumpor.com/v/yukai_du',
+    ];
+
+    var url = followedAccounts[Math.floor(Math.random() * followedAccounts.length)];
+
+    await page.goto(url);
 
     await page.waitForSelector('img.content__img');
     const images = await page.$$('img.content__img');
@@ -79,6 +90,8 @@ app.get('/instagram', async (req, res) => {
 
     // await page.screenshot({ path: 'example.png' });
 
+    var randomPost = urls[Math.floor(Math.random() * urls.length)];
+
     await browser.close();
-    res.send(urls[1]);
+    res.send(randomPost);
 });
