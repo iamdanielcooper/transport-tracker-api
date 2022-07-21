@@ -68,21 +68,14 @@ app.get('/instagram', async (req, res) => {
     });
     const page = await browser.newPage();
 
-    const followedAccounts = [
-        'https://dumpor.com/v/georgiasmiles',
-        'https://dumpor.com/v/dan_cooper28',
-        'https://dumpor.com/v/fingers_harris',
-        'https://dumpor.com/v/sadshrimps',
-        'https://dumpor.com/v/hattiestewart',
-        'https://dumpor.com/v/yukai_du',
-    ];
+    const followedAccounts = ['https://privatephotoviewer.com/usr/raku_uugp'];
 
     var url = followedAccounts[Math.floor(Math.random() * followedAccounts.length)];
 
     await page.goto(url);
 
-    await page.waitForSelector('img.content__img');
-    const images = await page.$$('img.content__img');
+    await page.waitForSelector('img#myImg');
+    const images = await page.$$('img#myImg');
 
     const urls = await Promise.all(images.map(async image => await image.evaluate(i => i.getAttribute('src'))));
 
