@@ -62,29 +62,33 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/instagram', async (req, res) => {
-    const browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
-    const page = await browser.newPage();
+    try {
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        });
+        const page = await browser.newPage();
 
-    const followedAccounts = ['https://privatephotoviewer.com/usr/raku_uugp'];
+        const followedAccounts = ['https://privatephotoviewer.com/usr/raku_uugp'];
 
-    var url = followedAccounts[Math.floor(Math.random() * followedAccounts.length)];
+        var url = followedAccounts[Math.floor(Math.random() * followedAccounts.length)];
 
-    await page.goto(url);
+        await page.goto(url);
 
-    await page.waitForSelector('img#myImg');
-    const images = await page.$$('img#myImg');
+        await page.waitForSelector('img#myImg');
+        const images = await page.$$('img#myImg');
 
-    const urls = await Promise.all(images.map(async image => await image.evaluate(i => i.getAttribute('src'))));
+        const urls = await Promise.all(images.map(async image => await image.evaluate(i => i.getAttribute('src'))));
 
-    console.log(urls);
+        console.log(urls);
 
-    // await page.screenshot({ path: 'example.png' });
+        // await page.screenshot({ path: 'example.png' });
 
-    var randomPost = urls[Math.floor(Math.random() * urls.length)];
+        var randomPost = urls[Math.floor(Math.random() * urls.length)];
 
-    await browser.close();
-    res.send(randomPost);
+        await browser.close();
+        res.send(randomPost);
+    } catch (error) {
+        res.send('https://c-fa.cdn.smule.com/rs-s38/arr/ca/85/943915a0-bd78-4bff-99f5-e7fd01a6809b.jpg');
+    }
 });
