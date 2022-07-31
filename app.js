@@ -70,9 +70,9 @@ app.get('/instagram', async (req, res) => {
         const page = await browser.newPage();
 
         const followedAccounts = [
-            'https://dumpor.com/v/georgiasmiles',
-            'https://dumpor.com/v/dan_cooper28',
-            'https://dumpor.com/v/fingers_harris',
+            'https://greatfon.com/v/georgiasmiles',
+            'https://greatfon.com/v/dan_cooper28',
+            'https://greatfon.com/v/fingers_harris',
         ];
 
         var url = followedAccounts[Math.floor(Math.random() * followedAccounts.length)];
